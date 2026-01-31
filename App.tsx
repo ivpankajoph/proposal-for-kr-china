@@ -1,5 +1,4 @@
-
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   Target, 
   Search, 
@@ -143,7 +142,7 @@ const TRANSLATIONS = {
     showcaseSub: '综合绩效可视化',
     showcaseDesc: '我们将谷歌广告的即时获客能力与 SEO 的长期复利权威相结合。看看我们如何主导付费和自然搜索结果页面 (SERP)。',
     adsLabel: '谷歌广告：即时主导',
-    adsDesc: '针对高意向 B2B 关键词，针对性“搜索广告”可在 48 小时内将康荣置于谷歌顶部。',
+    adsDesc: '针对高意向 B2B 关键词，针对性"搜索广告"可在 48 小时内将康荣置于谷歌顶部。',
     seoLabel: '自然 SEO：长期权威',
     seoDesc: '战略内容和技术数据表确保康荣在工程规格方面的排名始终保持第一。',
     analyticsTitle: '全球绩效分析中心',
@@ -198,6 +197,13 @@ const TRANSLATIONS = {
 const App: React.FC = () => {
   const [lang, setLang] = useState<'en' | 'zh' | null>(null);
   const t = lang ? TRANSLATIONS[lang] : TRANSLATIONS.en;
+
+  // Scroll to top when language is selected
+  useEffect(() => {
+    if (lang) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }, [lang]);
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
