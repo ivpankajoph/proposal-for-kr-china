@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { 
-  Target, 
-  Search, 
-  TrendingUp, 
-  Globe, 
-  CheckCircle2, 
-  BarChart3, 
+import {
+  Target,
+  Search,
+  TrendingUp,
+  Globe,
+  CheckCircle2,
+  BarChart3,
   ArrowRight,
   ChevronDown,
   XCircle,
@@ -40,7 +40,7 @@ import {
 import { motion, AnimatePresence } from 'framer-motion';
 
 const Section: React.FC<{ children: React.ReactNode; className?: string; id?: string }> = ({ children, className = "", id }) => (
-  <section id={id} className={`py-24 px-6 md:px-12 ${className}`}>
+  <section id={id} className={`py-12 md:py-24 px-4 md:px-12 ${className}`}>
     <div className="max-w-7xl mx-auto">
       {children}
     </div>
@@ -212,11 +212,16 @@ const App: React.FC = () => {
     }
   };
 
-  const renderVal = (val: any, isOrange?: boolean) => {
-    if (val === true) return <CheckCircle2 className={`${isOrange ? 'text-white' : 'text-[#005bab]'} mx-auto`} size={32} />;
-    if (val === false) return <XCircle className="text-slate-200 mx-auto" size={32} />;
+  const renderVal = (val: any, isOrange?: boolean, align: 'left' | 'center' | 'right' = 'center') => {
+    const isCenter = align === 'center';
+    const isRight = align === 'right';
+    const iconMargin = isCenter ? 'mx-auto' : (isRight ? 'ml-auto' : '');
+    const textAlign = isCenter ? 'text-center' : (isRight ? 'text-right' : 'text-left');
+
+    if (val === true) return <CheckCircle2 className={`${isOrange ? 'text-white' : 'text-[#005bab]'} ${iconMargin}`} size={24} />;
+    if (val === false) return <XCircle className={`text-slate-200 ${iconMargin}`} size={24} />;
     return (
-      <span className={`block w-full text-center leading-tight ${isOrange ? 'text-white text-4xl font-black drop-shadow-md' : 'text-slate-900 text-lg font-bold'}`}>
+      <span className={`block w-full ${textAlign} leading-tight ${isOrange ? 'text-white text-2xl md:text-4xl font-black drop-shadow-md' : 'text-slate-900 text-base md:text-lg font-bold'}`}>
         {val}
       </span>
     );
@@ -226,38 +231,38 @@ const App: React.FC = () => {
     return (
       <div className="min-h-screen bg-slate-950 flex items-center justify-center p-6 overflow-hidden relative">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_#005bab22_0%,_transparent_70%)]"></div>
-        <motion.div 
-          initial={{ opacity: 0, scale: 0.9 }} 
-          animate={{ opacity: 1, scale: 1 }} 
-          className="max-w-4xl w-full bg-white rounded-[4rem] shadow-2xl p-12 md:p-24 text-center relative z-10 border border-white/20"
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          className="max-w-4xl w-full bg-white rounded-[2rem] md:rounded-[4rem] shadow-2xl p-6 md:p-24 text-center relative z-10 border border-white/20"
         >
           <div className="mb-12">
             <p className="text-[#005bab] font-black text-xs uppercase tracking-[0.5em] mb-4">Online Promotion House</p>
             <div className="w-20 h-20 bg-[#005bab] rounded-3xl flex items-center justify-center text-white font-black text-4xl mx-auto shadow-2xl shadow-blue-500/40">KR</div>
           </div>
-          
-          <h1 className="text-5xl md:text-7xl font-serif font-black text-slate-900 mb-6 uppercase tracking-tight leading-none">
-            Google Promotion <br/> <span className="text-[#005bab]">Proposal</span>
+
+          <h1 className="text-4xl md:text-7xl font-serif font-black text-slate-900 mb-6 uppercase tracking-tight leading-none">
+            Google Promotion <br /> <span className="text-[#005bab]">Proposal</span>
           </h1>
-          <p className="text-slate-500 text-xl mb-16 font-medium uppercase tracking-[0.2em]">Select your language</p>
-          
-          <div className="grid md:grid-cols-2 gap-8">
-            <button 
+          <p className="text-slate-500 text-lg md:text-xl mb-12 font-medium uppercase tracking-[0.2em]">Select your language</p>
+
+          <div className="grid md:grid-cols-2 gap-4 md:gap-8">
+            <button
               onClick={() => setLang('en')}
-              className="group relative bg-[#005bab] hover:bg-slate-900 text-white p-10 rounded-[3rem] transition-all duration-500 flex flex-col items-center justify-center gap-4 shadow-xl hover:-translate-y-2"
+              className="group relative bg-[#005bab] hover:bg-slate-900 text-white p-6 md:p-10 rounded-[2rem] md:rounded-[3rem] transition-all duration-500 flex flex-col items-center justify-center gap-4 shadow-xl hover:-translate-y-2"
             >
               <Languages className="mb-2" size={32} />
-              <span className="text-xl font-black uppercase tracking-widest leading-snug">Check Google Promotion Proposal in English Language</span>
-              <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 rounded-[3rem] transition-opacity"></div>
+              <span className="text-lg md:text-xl font-black uppercase tracking-widest leading-snug">Check Google Promotion Proposal in English Language</span>
+              <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 rounded-[2rem] md:rounded-[3rem] transition-opacity"></div>
             </button>
-            
-            <button 
+
+            <button
               onClick={() => setLang('zh')}
-              className="group relative bg-slate-900 hover:bg-[#005bab] text-white p-10 rounded-[3rem] transition-all duration-500 flex flex-col items-center justify-center gap-4 shadow-xl hover:-translate-y-2"
+              className="group relative bg-slate-900 hover:bg-[#005bab] text-white p-6 md:p-10 rounded-[2rem] md:rounded-[3rem] transition-all duration-500 flex flex-col items-center justify-center gap-4 shadow-xl hover:-translate-y-2"
             >
               <Languages className="mb-2" size={32} />
-              <span className="text-xl font-black uppercase tracking-widest leading-relaxed">用中文语言查看谷歌推广方案<br/>(Check in Chinese)</span>
-              <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 rounded-[3rem] transition-opacity"></div>
+              <span className="text-lg md:text-xl font-black uppercase tracking-widest leading-relaxed">用中文语言查看谷歌推广方案<br />(Check in Chinese)</span>
+              <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 rounded-[2rem] md:rounded-[3rem] transition-opacity"></div>
             </button>
           </div>
         </motion.div>
@@ -278,8 +283,8 @@ const App: React.FC = () => {
         </div>
         <nav className="hidden lg:flex items-center gap-6">
           {t.nav.map((item, idx) => (
-            <button 
-              key={idx} 
+            <button
+              key={idx}
               onClick={() => scrollToSection(['vision', 'strategy', 'showcase', 'pricing', 'whyus'][idx])}
               className="text-slate-500 hover:text-[#005bab] font-bold text-xs uppercase tracking-widest transition-colors"
             >
@@ -296,21 +301,21 @@ const App: React.FC = () => {
       <Section id="vision" className="min-h-screen flex flex-col items-center justify-center text-center pt-24 relative overflow-hidden">
         <div className="absolute inset-0 -z-10 opacity-[0.05]" style={{ backgroundImage: 'radial-gradient(#005bab 1px, transparent 1px)', backgroundSize: '30px 30px' }}></div>
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#005bab]/5 rounded-full blur-[120px] -z-10"></div>
-        
+
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-6 flex items-center gap-3">
           <span className="h-px w-16 bg-[#005bab]"></span>
           <span className="text-[#005bab] font-black text-[10px] uppercase tracking-[0.5em]">{t.heroSub}</span>
           <span className="h-px w-16 bg-[#005bab]"></span>
         </motion.div>
-        
-        <motion.h1 
+
+        <motion.h1
           initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1, duration: 0.8 }}
-          className="text-4xl md:text-5xl lg:text-7xl font-serif font-black text-slate-900 mb-8 leading-[1.1] uppercase tracking-tighter"
+          className="text-3xl md:text-5xl lg:text-7xl font-serif font-black text-slate-900 mb-8 leading-[1.1] uppercase tracking-tighter"
         >
-          {t.heroTitle1} <span className="text-[#005bab] italic">{t.heroTitle2}</span><br/>{t.heroTitle3}
+          {t.heroTitle1} <span className="text-[#005bab] italic">{t.heroTitle2}</span><br />{t.heroTitle3}
         </motion.h1>
 
-        <motion.p 
+        <motion.p
           initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }}
           className="text-slate-500 text-lg md:text-2xl max-w-4xl mb-16 leading-relaxed"
         >
@@ -345,7 +350,7 @@ const App: React.FC = () => {
         <div className="grid lg:grid-cols-2 gap-20 items-center">
           <div>
             <div className="inline-block bg-[#005bab]/10 text-[#005bab] px-4 py-1 rounded-full text-[10px] font-black uppercase tracking-[0.2em] mb-6">Execution Engine</div>
-            <h2 className="text-5xl md:text-7xl font-serif font-black text-slate-900 mb-8 uppercase leading-[0.9]">{t.strategyTitle}</h2>
+            <h2 className="text-4xl md:text-7xl font-serif font-black text-slate-900 mb-8 uppercase leading-[0.9]">{t.strategyTitle}</h2>
             <div className="space-y-12 mt-12">
               <div className="group">
                 <div className="flex gap-6 items-center mb-6">
@@ -356,9 +361,9 @@ const App: React.FC = () => {
                 </div>
                 <p className="text-slate-600 leading-relaxed text-xl font-medium mb-6">{t.strategy1Desc}</p>
                 <div className="flex flex-wrap gap-2">
-                   {["Google.co.uk", "Google.ae", "Google.africa", "Google.com"].map(ex => (
-                     <span key={ex} className="bg-blue-50 text-[#005bab] px-3 py-1 rounded-lg text-[10px] font-black border border-blue-100 uppercase tracking-widest">{ex}</span>
-                   ))}
+                  {["Google.co.uk", "Google.ae", "Google.africa", "Google.com"].map(ex => (
+                    <span key={ex} className="bg-blue-50 text-[#005bab] px-3 py-1 rounded-lg text-[10px] font-black border border-blue-100 uppercase tracking-widest">{ex}</span>
+                  ))}
                 </div>
               </div>
               <div className="group">
@@ -375,32 +380,32 @@ const App: React.FC = () => {
           <div className="relative">
             <div className="bg-slate-900 rounded-[3rem] p-8 shadow-2xl border border-white/10 relative overflow-hidden">
               <div className="flex justify-between items-center mb-10 text-white/40 font-black text-[10px] uppercase tracking-widest">
-                 <div className="flex gap-2">
-                    <div className="w-3 h-3 rounded-full bg-red-400"></div>
-                    <div className="w-3 h-3 rounded-full bg-yellow-400"></div>
-                    <div className="w-3 h-3 rounded-full bg-green-400"></div>
-                 </div>
-                 <span>Analysis</span>
+                <div className="flex gap-2">
+                  <div className="w-3 h-3 rounded-full bg-red-400"></div>
+                  <div className="w-3 h-3 rounded-full bg-yellow-400"></div>
+                  <div className="w-3 h-3 rounded-full bg-green-400"></div>
+                </div>
+                <span>Analysis</span>
               </div>
               <div className="space-y-8">
-                 <div className="space-y-2">
-                    <div className="flex justify-between text-[10px] text-white/50 font-black uppercase tracking-widest">
-                       <span>USA / CA</span>
-                       <span>Current: 5% → Target: 85%</span>
-                    </div>
-                    <div className="h-3 w-full bg-white/5 rounded-full overflow-hidden">
-                       <motion.div initial={{ width: 0 }} whileInView={{ width: '85%' }} transition={{ duration: 1.5 }} className="h-full bg-[#005bab]"></motion.div>
-                    </div>
-                 </div>
-                 <div className="space-y-2">
-                    <div className="flex justify-between text-[10px] text-white/50 font-black uppercase tracking-widest">
-                       <span>Germany / EU</span>
-                       <span>Current: 2% → Target: 70%</span>
-                    </div>
-                    <div className="h-3 w-full bg-white/5 rounded-full overflow-hidden">
-                       <motion.div initial={{ width: 0 }} whileInView={{ width: '70%' }} transition={{ duration: 1.5, delay: 0.2 }} className="h-full bg-blue-400"></motion.div>
-                    </div>
-                 </div>
+                <div className="space-y-2">
+                  <div className="flex justify-between text-[10px] text-white/50 font-black uppercase tracking-widest">
+                    <span>USA / CA</span>
+                    <span>Current: 5% → Target: 85%</span>
+                  </div>
+                  <div className="h-3 w-full bg-white/5 rounded-full overflow-hidden">
+                    <motion.div initial={{ width: 0 }} whileInView={{ width: '85%' }} transition={{ duration: 1.5 }} className="h-full bg-[#005bab]"></motion.div>
+                  </div>
+                </div>
+                <div className="space-y-2">
+                  <div className="flex justify-between text-[10px] text-white/50 font-black uppercase tracking-widest">
+                    <span>Germany / EU</span>
+                    <span>Current: 2% → Target: 70%</span>
+                  </div>
+                  <div className="h-3 w-full bg-white/5 rounded-full overflow-hidden">
+                    <motion.div initial={{ width: 0 }} whileInView={{ width: '70%' }} transition={{ duration: 1.5, delay: 0.2 }} className="h-full bg-blue-400"></motion.div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -409,14 +414,14 @@ const App: React.FC = () => {
 
       {/* SEO + ADS SHOWCASE Section */}
       <Section id="showcase" className="bg-slate-50">
-        <div className="text-center mb-20">
-          <h2 className="text-5xl md:text-8xl font-serif font-black text-slate-900 mb-6 uppercase tracking-tighter leading-none">{t.showcaseTitle}</h2>
-          <p className="text-slate-500 text-xl font-medium max-w-3xl mx-auto">{t.showcaseDesc}</p>
+        <div className="text-center mb-12 md:mb-20">
+          <h2 className="text-4xl md:text-8xl font-serif font-black text-slate-900 mb-6 uppercase tracking-tighter leading-none">{t.showcaseTitle}</h2>
+          <p className="text-slate-500 text-lg md:text-xl font-medium max-w-3xl mx-auto">{t.showcaseDesc}</p>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-12">
           {/* ADS Visual Component */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             className="bg-white rounded-[3rem] p-10 shadow-2xl border border-slate-100"
@@ -431,21 +436,21 @@ const App: React.FC = () => {
               </div>
             </div>
             <div className="space-y-4 bg-slate-50 p-6 rounded-2xl border border-slate-200">
-               <div className="flex items-center gap-2">
-                  <span className="bg-white px-2 py-0.5 border border-slate-300 rounded text-[10px] font-black text-slate-600 uppercase">Ad</span>
-                  <span className="text-blue-700 font-bold text-sm underline cursor-pointer">Industrial Ceramic LED Solutions - Kangrong Official</span>
-               </div>
-               <p className="text-slate-500 text-xs leading-relaxed">Top technical LED manufacturer. 19x Thermal Radiation advantage. Get a bulk quote today for global export.</p>
-               <div className="flex gap-4 text-[10px] text-slate-400 font-bold">
-                 <span>Rating: ★★★★★</span>
-                 <span>Official Technical Specs</span>
-               </div>
+              <div className="flex items-center gap-2">
+                <span className="bg-white px-2 py-0.5 border border-slate-300 rounded text-[10px] font-black text-slate-600 uppercase">Ad</span>
+                <span className="text-blue-700 font-bold text-sm underline cursor-pointer">Industrial Ceramic LED Solutions - Kangrong Official</span>
+              </div>
+              <p className="text-slate-500 text-xs leading-relaxed">Top technical LED manufacturer. 19x Thermal Radiation advantage. Get a bulk quote today for global export.</p>
+              <div className="flex gap-4 text-[10px] text-slate-400 font-bold">
+                <span>Rating: ★★★★★</span>
+                <span>Official Technical Specs</span>
+              </div>
             </div>
             <p className="mt-8 text-slate-500 font-medium leading-relaxed">{t.adsDesc}</p>
           </motion.div>
 
           {/* SEO Visual Component */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             className="bg-slate-900 rounded-[3rem] p-10 shadow-2xl border border-white/10 text-white"
@@ -460,14 +465,14 @@ const App: React.FC = () => {
               </div>
             </div>
             <div className="space-y-4 bg-white/5 p-6 rounded-2xl border border-white/5">
-               <div className="flex items-center gap-2">
-                  <span className="text-blue-400 font-bold text-sm underline cursor-pointer">Thermal Radiation Performance in Ceramic LED - Engineering Review</span>
-               </div>
-               <p className="text-white/40 text-xs leading-relaxed">Technical analysis of 19x thermal advantage. Detailed PDF data sheets for procurement officers in LED lighting...</p>
-               <div className="flex gap-4 text-[10px] text-white/20 font-bold">
-                 <span>Position: #1 Organic</span>
-                 <span>Global Authority</span>
-               </div>
+              <div className="flex items-center gap-2">
+                <span className="text-blue-400 font-bold text-sm underline cursor-pointer">Thermal Radiation Performance in Ceramic LED - Engineering Review</span>
+              </div>
+              <p className="text-white/40 text-xs leading-relaxed">Technical analysis of 19x thermal advantage. Detailed PDF data sheets for procurement officers in LED lighting...</p>
+              <div className="flex gap-4 text-[10px] text-white/20 font-bold">
+                <span>Position: #1 Organic</span>
+                <span>Global Authority</span>
+              </div>
             </div>
             <p className="mt-8 text-white/40 font-medium leading-relaxed">{t.seoDesc}</p>
           </motion.div>
@@ -475,123 +480,123 @@ const App: React.FC = () => {
 
         {/* ANALYTICS HUD */}
         <div className="mt-16 bg-white rounded-[4rem] p-12 md:p-20 shadow-xl border border-slate-100 overflow-hidden relative">
-           <div className="absolute top-0 right-0 p-8 opacity-5">
-              <BarChart3 size={200} />
-           </div>
-           <div className="relative z-10">
-              <div className="text-center mb-12">
-                <h3 className="text-3xl font-black text-slate-900 mb-2 uppercase tracking-tight flex items-center justify-center gap-4">
-                  <Gauge className="text-[#005bab]" /> {t.analyticsTitle}
-                </h3>
-                <p className="text-[#005bab] font-black text-[10px] uppercase tracking-[0.3em]">{t.analyticsSub}</p>
+          <div className="absolute top-0 right-0 p-8 opacity-5">
+            <BarChart3 size={200} />
+          </div>
+          <div className="relative z-10">
+            <div className="text-center mb-12">
+              <h3 className="text-3xl font-black text-slate-900 mb-2 uppercase tracking-tight flex items-center justify-center gap-4">
+                <Gauge className="text-[#005bab]" /> {t.analyticsTitle}
+              </h3>
+              <p className="text-[#005bab] font-black text-[10px] uppercase tracking-[0.3em]">{t.analyticsSub}</p>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-12 items-center">
+              <div className="space-y-8">
+                <div className="bg-slate-50 p-8 rounded-[2.5rem] border border-slate-200 relative group overflow-hidden">
+                  <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:scale-125 transition-transform">
+                    <TrendingUp size={64} className="text-[#005bab]" />
+                  </div>
+                  <p className="text-[#005bab] font-black text-[10px] uppercase tracking-widest mb-4 flex items-center gap-2">
+                    <Globe size={14} /> {t.metric1Title}
+                  </p>
+                  <div className="flex items-center gap-4 mb-6">
+                    <span className="text-5xl font-black text-slate-900 tracking-tighter">+240%</span>
+                    <div className="h-2 flex-1 bg-blue-100 rounded-full overflow-hidden">
+                      <motion.div initial={{ width: 0 }} whileInView={{ width: '94%' }} transition={{ duration: 1.5 }} className="h-full bg-[#005bab]"></motion.div>
+                    </div>
+                  </div>
+                  <p className="text-slate-500 text-sm font-medium leading-relaxed">{t.metric1Desc}</p>
+                </div>
+
+                <div className="bg-slate-50 p-8 rounded-[2.5rem] border border-slate-200 relative group overflow-hidden">
+                  <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:scale-125 transition-transform">
+                    <PieChart size={64} className="text-green-600" />
+                  </div>
+                  <p className="text-green-600 font-black text-[10px] uppercase tracking-widest mb-4 flex items-center gap-2">
+                    <Target size={14} /> {t.metric2Title}
+                  </p>
+                  <div className="flex items-end gap-1.5 h-16 mb-6">
+                    {[25, 45, 30, 65, 55, 85, 100].map((h, i) => (
+                      <motion.div
+                        key={i}
+                        initial={{ height: 0 }}
+                        whileInView={{ height: `${h}%` }}
+                        transition={{ delay: i * 0.1, duration: 0.8 }}
+                        className="flex-1 bg-green-200 rounded-t-lg group-hover:bg-green-400 transition-colors"
+                      ></motion.div>
+                    ))}
+                  </div>
+                  <p className="text-slate-500 text-sm font-medium leading-relaxed">{t.metric2Desc}</p>
+                </div>
               </div>
 
-              <div className="grid md:grid-cols-2 gap-12 items-center">
-                 <div className="space-y-8">
-                    <div className="bg-slate-50 p-8 rounded-[2.5rem] border border-slate-200 relative group overflow-hidden">
-                       <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:scale-125 transition-transform">
-                          <TrendingUp size={64} className="text-[#005bab]" />
-                       </div>
-                       <p className="text-[#005bab] font-black text-[10px] uppercase tracking-widest mb-4 flex items-center gap-2">
-                         <Globe size={14} /> {t.metric1Title}
-                       </p>
-                       <div className="flex items-center gap-4 mb-6">
-                          <span className="text-5xl font-black text-slate-900 tracking-tighter">+240%</span>
-                          <div className="h-2 flex-1 bg-blue-100 rounded-full overflow-hidden">
-                             <motion.div initial={{ width: 0 }} whileInView={{ width: '94%' }} transition={{ duration: 1.5 }} className="h-full bg-[#005bab]"></motion.div>
-                          </div>
-                       </div>
-                       <p className="text-slate-500 text-sm font-medium leading-relaxed">{t.metric1Desc}</p>
+              <div className="relative group">
+                <div className="bg-slate-950 rounded-[3rem] p-4 shadow-2xl border border-white/10 relative z-20 overflow-hidden">
+                  <div className="bg-slate-900 rounded-2xl overflow-hidden aspect-[4/3] relative">
+                    {/* MOCK ANALYTICS UI */}
+                    <div className="absolute inset-0 p-6 flex flex-col gap-4">
+                      <div className="flex justify-between items-center border-b border-white/5 pb-4">
+                        <div className="flex gap-2">
+                          <div className="w-2 h-2 rounded-full bg-red-400"></div>
+                          <div className="w-2 h-2 rounded-full bg-yellow-400"></div>
+                          <div className="w-2 h-2 rounded-full bg-green-400"></div>
+                        </div>
+                        <span className="text-white/20 text-[8px] font-black uppercase tracking-widest">Global Export Console v4.0</span>
+                      </div>
+                      <div className="flex-1 flex flex-col justify-center items-center text-center p-8">
+                        <Activity className="text-[#005bab] mb-4 animate-pulse" size={48} />
+                        <h4 className="text-white font-black text-sm mb-2 tracking-tight">{t.previewLabel}</h4>
+                        <p className="text-white/20 text-[10px] uppercase tracking-widest leading-relaxed">Streaming Real-time RFQ Data<br />from Google.ae & Google.co.uk</p>
+                        <div className="mt-8 grid grid-cols-3 gap-2 w-full">
+                          {[1, 2, 3].map(x => <div key={x} className="h-1 bg-white/5 rounded-full"></div>)}
+                        </div>
+                      </div>
                     </div>
+                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_#005bab11_0%,_transparent_70%)]"></div>
+                  </div>
+                </div>
 
-                    <div className="bg-slate-50 p-8 rounded-[2.5rem] border border-slate-200 relative group overflow-hidden">
-                       <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:scale-125 transition-transform">
-                          <PieChart size={64} className="text-green-600" />
-                       </div>
-                       <p className="text-green-600 font-black text-[10px] uppercase tracking-widest mb-4 flex items-center gap-2">
-                         <Target size={14} /> {t.metric2Title}
-                       </p>
-                       <div className="flex items-end gap-1.5 h-16 mb-6">
-                          {[25, 45, 30, 65, 55, 85, 100].map((h, i) => (
-                             <motion.div 
-                                key={i} 
-                                initial={{ height: 0 }} 
-                                whileInView={{ height: `${h}%` }} 
-                                transition={{ delay: i * 0.1, duration: 0.8 }}
-                                className="flex-1 bg-green-200 rounded-t-lg group-hover:bg-green-400 transition-colors"
-                             ></motion.div>
-                          ))}
-                       </div>
-                       <p className="text-slate-500 text-sm font-medium leading-relaxed">{t.metric2Desc}</p>
+                {/* Floating elements to add "analytics" feel */}
+                <motion.div
+                  animate={{ y: [0, -10, 0] }}
+                  transition={{ duration: 3, repeat: Infinity }}
+                  className="absolute -top-6 -right-6 z-30 bg-white p-4 rounded-2xl shadow-xl border border-slate-100 hidden lg:block"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center text-[#005bab]"><MousePointer2 size={16} /></div>
+                    <div>
+                      <p className="text-[10px] font-black text-slate-900 uppercase leading-none">Export Click</p>
+                      <p className="text-[8px] text-slate-400 font-bold uppercase mt-1">Munich, Germany</p>
                     </div>
-                 </div>
+                  </div>
+                </motion.div>
 
-                 <div className="relative group">
-                    <div className="bg-slate-950 rounded-[3rem] p-4 shadow-2xl border border-white/10 relative z-20 overflow-hidden">
-                       <div className="bg-slate-900 rounded-2xl overflow-hidden aspect-[4/3] relative">
-                          {/* MOCK ANALYTICS UI */}
-                          <div className="absolute inset-0 p-6 flex flex-col gap-4">
-                             <div className="flex justify-between items-center border-b border-white/5 pb-4">
-                                <div className="flex gap-2">
-                                   <div className="w-2 h-2 rounded-full bg-red-400"></div>
-                                   <div className="w-2 h-2 rounded-full bg-yellow-400"></div>
-                                   <div className="w-2 h-2 rounded-full bg-green-400"></div>
-                                </div>
-                                <span className="text-white/20 text-[8px] font-black uppercase tracking-widest">Global Export Console v4.0</span>
-                             </div>
-                             <div className="flex-1 flex flex-col justify-center items-center text-center p-8">
-                                <Activity className="text-[#005bab] mb-4 animate-pulse" size={48} />
-                                <h4 className="text-white font-black text-sm mb-2 tracking-tight">{t.previewLabel}</h4>
-                                <p className="text-white/20 text-[10px] uppercase tracking-widest leading-relaxed">Streaming Real-time RFQ Data<br/>from Google.ae & Google.co.uk</p>
-                                <div className="mt-8 grid grid-cols-3 gap-2 w-full">
-                                   {[1,2,3].map(x => <div key={x} className="h-1 bg-white/5 rounded-full"></div>)}
-                                </div>
-                             </div>
-                          </div>
-                          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_#005bab11_0%,_transparent_70%)]"></div>
-                       </div>
+                <div className="absolute -bottom-8 -left-8 w-40 h-64 bg-slate-950 rounded-[2rem] p-3 shadow-2xl border border-white/20 hidden md:block z-10">
+                  <div className="h-full w-full bg-slate-900 rounded-2xl flex flex-col items-center justify-center p-4">
+                    <Smartphone className="text-white/10 mb-4" size={32} />
+                    <div className="space-y-2 w-full">
+                      <div className="h-1 w-full bg-white/5 rounded"></div>
+                      <div className="h-1 w-3/4 bg-white/5 rounded"></div>
+                      <div className="h-1 w-1/2 bg-[#005bab] rounded"></div>
                     </div>
-                    
-                    {/* Floating elements to add "analytics" feel */}
-                    <motion.div 
-                      animate={{ y: [0, -10, 0] }} 
-                      transition={{ duration: 3, repeat: Infinity }}
-                      className="absolute -top-6 -right-6 z-30 bg-white p-4 rounded-2xl shadow-xl border border-slate-100 hidden lg:block"
-                    >
-                       <div className="flex items-center gap-3">
-                          <div className="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center text-[#005bab]"><MousePointer2 size={16} /></div>
-                          <div>
-                             <p className="text-[10px] font-black text-slate-900 uppercase leading-none">Export Click</p>
-                             <p className="text-[8px] text-slate-400 font-bold uppercase mt-1">Munich, Germany</p>
-                          </div>
-                       </div>
-                    </motion.div>
-                    
-                    <div className="absolute -bottom-8 -left-8 w-40 h-64 bg-slate-950 rounded-[2rem] p-3 shadow-2xl border border-white/20 hidden md:block z-10">
-                       <div className="h-full w-full bg-slate-900 rounded-2xl flex flex-col items-center justify-center p-4">
-                          <Smartphone className="text-white/10 mb-4" size={32} />
-                          <div className="space-y-2 w-full">
-                             <div className="h-1 w-full bg-white/5 rounded"></div>
-                             <div className="h-1 w-3/4 bg-white/5 rounded"></div>
-                             <div className="h-1 w-1/2 bg-[#005bab] rounded"></div>
-                          </div>
-                       </div>
-                    </div>
-                 </div>
+                  </div>
+                </div>
               </div>
-           </div>
+            </div>
+          </div>
         </div>
       </Section>
 
       {/* ROADMAP Section */}
       <Section id="roadmap" className="bg-[#f0f4f8] relative overflow-hidden">
-        <div className="text-center mb-20">
-          <h2 className="text-5xl md:text-8xl font-serif font-black text-slate-900 mb-6 uppercase leading-none tracking-tighter">{t.roadmapTitle}</h2>
+        <div className="text-center mb-12 md:mb-20">
+          <h2 className="text-4xl md:text-8xl font-serif font-black text-slate-900 mb-6 uppercase leading-none tracking-tighter">{t.roadmapTitle}</h2>
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 relative z-10">
           {t.roadmapSteps.map((step, idx) => (
-            <motion.div 
+            <motion.div
               key={idx}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -617,12 +622,41 @@ const App: React.FC = () => {
 
       {/* PRICING Section */}
       <Section id="pricing" className="bg-white scroll-mt-20">
-        <div className="text-center mb-16">
-          <h2 className="text-5xl md:text-9xl font-serif font-black text-slate-900 mb-6 uppercase leading-none tracking-tighter">{t.pricingTitle}</h2>
-          <p className="text-slate-500 max-w-2xl mx-auto text-xl font-medium uppercase font-black tracking-widest">{t.pricingSub}</p>
+        <div className="text-center mb-10 md:mb-16">
+          <h2 className="text-4xl md:text-9xl font-serif font-black text-slate-900 mb-6 uppercase leading-none tracking-tighter">{t.pricingTitle}</h2>
+          <p className="text-slate-500 max-w-2xl mx-auto text-lg md:text-xl font-medium uppercase font-black tracking-widest">{t.pricingSub}</p>
         </div>
 
-        <div className="overflow-hidden border-4 border-slate-900 rounded-[4rem] bg-white shadow-2xl relative">
+        {/* Mobile Pricing Cards */}
+        <div className="md:hidden space-y-6">
+          {t.pkgs.map((pkgName, pkgIdx) => (
+            <div key={pkgIdx} className={`rounded-[2rem] p-6 border-2 ${pkgIdx === 1 ? 'bg-slate-900 text-white border-slate-900' : 'bg-white border-slate-100'} shadow-xl relative overflow-hidden`}>
+              {pkgIdx === 1 && (
+                <div className="absolute top-0 right-0 bg-[#005bab] text-white text-[10px] font-black uppercase tracking-widest py-1 px-4 rounded-bl-xl">
+                  Popular
+                </div>
+              )}
+              {pkgIdx === 2 && (
+                <div className="absolute top-0 right-0 bg-[#ff6b00] text-white text-[10px] font-black uppercase tracking-widest py-1 px-4 rounded-bl-xl">
+                  Best Value
+                </div>
+              )}
+              <h3 className="text-2xl font-serif font-black mb-6 italic">{pkgName}</h3>
+              <div className="space-y-4">
+                {t.features.map((feature, featIdx) => (
+                  <div key={featIdx} className="flex justify-between items-center border-b border-slate-100/50 pb-3 last:border-0 last:pb-0">
+                    <span className={`text-[10px] font-black uppercase tracking-widest ${pkgIdx === 1 ? 'text-white/60' : 'text-slate-400'} max-w-[50%]`}>{feature.label}</span>
+                    <div className={`pl-2 flex flex-col items-end ${feature.highlight === 'orange' ? 'bg-[#ff6b00] py-2 px-3 rounded-xl shadow-lg -mr-2 scale-110 origin-right' : ''}`}>
+                      {renderVal(feature.values[pkgIdx], feature.highlight === 'orange', 'right')}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="hidden md:block overflow-hidden border-4 border-slate-900 rounded-[4rem] bg-white shadow-2xl relative">
           <div className="overflow-x-auto">
             <table className="w-full border-collapse">
               <thead>
@@ -640,7 +674,7 @@ const App: React.FC = () => {
                   const isHighlightedBlue = row.highlight === "blue";
                   const isHighlightedOrange = row.highlight === "orange";
                   const isAdsMeta = row.type === "ads-meta";
-                  
+
                   let rowBg = "bg-white";
                   let labelColor = "text-slate-950";
                   let labelSize = "text-[16px]";
@@ -675,8 +709,8 @@ const App: React.FC = () => {
       </Section>
 
       {/* WHY US Section */}
-      <Section id="whyus" className="bg-slate-900 text-white rounded-[4rem] mx-4 md:mx-12 my-12 relative overflow-hidden">
-        <div className="text-center mb-20">
+      <Section id="whyus" className="bg-slate-900 text-white rounded-[2rem] md:rounded-[4rem] mx-0 md:mx-12 my-12 relative overflow-hidden">
+        <div className="text-center mb-12 md:mb-20">
           <h2 className="text-4xl md:text-7xl font-serif font-black mb-6 uppercase leading-tight tracking-tight">{t.whyTitle}</h2>
           <p className="text-white/40 text-xl font-medium max-w-2xl mx-auto">{t.whyDesc}</p>
         </div>
@@ -695,47 +729,47 @@ const App: React.FC = () => {
       </Section>
 
       {/* Footer */}
-      <footer className="bg-white py-24 px-6 md:px-12 border-t border-slate-100">
-        <div className="max-w-6xl mx-auto bg-white rounded-[4rem] shadow-2xl overflow-hidden border border-slate-100 relative">
+      <footer className="bg-white py-12 md:py-24 px-4 md:px-12 border-t border-slate-100">
+        <div className="max-w-6xl mx-auto bg-white rounded-[2rem] md:rounded-[4rem] shadow-2xl overflow-hidden border border-slate-100 relative">
           <div className="bg-slate-950 text-white py-6 px-10 text-center text-[10px] font-black uppercase tracking-[0.5em]">
             {t.footerTag}
           </div>
-          
-          <div className="p-12 md:p-20 flex flex-col lg:flex-row justify-between items-start gap-16">
-            <div className="space-y-8">
-              <div className="flex items-center gap-4 mb-8">
-                <div className="w-16 h-16 bg-slate-900 rounded-[1.5rem] flex items-center justify-center text-white font-black text-2xl">KR</div>
+
+          <div className="p-6 md:p-20 flex flex-col lg:flex-row justify-between items-start gap-10 md:gap-16">
+            <div className="space-y-8 w-full">
+              <div className="flex flex-col md:flex-row items-start md:items-center gap-4 mb-8">
+                <div className="w-16 h-16 bg-slate-900 rounded-[1.5rem] flex items-center justify-center text-white font-black text-2xl shadow-xl">KR</div>
                 <div>
-                  <h3 className="text-3xl font-black text-slate-900 tracking-tighter uppercase leading-[0.8]">{t.footerBrand}</h3>
+                  <h3 className="text-2xl md:text-3xl font-black text-slate-900 tracking-tighter uppercase leading-[0.9]">{t.footerBrand}</h3>
                   <p className="text-[#005bab] text-[10px] font-black uppercase tracking-[0.3em] mt-2">{t.footerSub}</p>
                 </div>
               </div>
 
               <div className="space-y-6">
-                <div className="flex items-center gap-6 text-slate-600 group cursor-pointer">
-                  <div className="w-12 h-12 rounded-full bg-slate-50 flex items-center justify-center text-slate-400 group-hover:bg-[#005bab]/10 group-hover:text-[#005bab] transition-all">
-                    <Mail size={22} />
+                <div className="flex items-center gap-4 md:gap-6 text-slate-600 group cursor-pointer">
+                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-slate-50 flex items-center justify-center text-slate-400 group-hover:bg-[#005bab]/10 group-hover:text-[#005bab] transition-all shrink-0">
+                    <Mail size={20} />
                   </div>
-                  <p className="font-black text-xl tracking-tighter italic">kitty@onlinepromotionhouse.com</p>
+                  <p className="font-black text-sm md:text-xl tracking-tighter italic break-all">{t.footerBrand === 'Online Promotion House' ? 'kitty@onlinepromotionhouse.com' : 'kitty@onlinepromotionhouse.com'}</p>
                 </div>
-                <div className="flex items-center gap-6 text-slate-600 group cursor-pointer">
-                  <div className="w-12 h-12 rounded-full bg-slate-50 flex items-center justify-center text-slate-400 group-hover:bg-[#005bab]/10 group-hover:text-[#005bab] transition-all">
-                    <Phone size={22} />
+                <div className="flex items-center gap-4 md:gap-6 text-slate-600 group cursor-pointer">
+                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-slate-50 flex items-center justify-center text-slate-400 group-hover:bg-[#005bab]/10 group-hover:text-[#005bab] transition-all shrink-0">
+                    <Phone size={20} />
                   </div>
-                  <p className="font-black text-xl tracking-tighter">+91 6262914149</p>
+                  <p className="font-black text-lg md:text-xl tracking-tighter">+91 6262914149</p>
                 </div>
-                <div className="flex items-center gap-6 text-slate-600 group cursor-pointer">
-                  <div className="w-12 h-12 rounded-full bg-slate-50 flex items-center justify-center text-slate-400 group-hover:bg-green-50 transition-all">
-                    <MessageCircle size={22} className="text-green-500" />
+                <div className="flex items-center gap-4 md:gap-6 text-slate-600 group cursor-pointer">
+                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-slate-50 flex items-center justify-center text-slate-400 group-hover:bg-green-50 transition-all shrink-0">
+                    <MessageCircle size={20} className="text-green-500" />
                   </div>
-                  <p className="font-black text-xl tracking-tighter">+91 6262914149</p>
+                  <p className="font-black text-lg md:text-xl tracking-tighter">+91 6262914149</p>
                 </div>
               </div>
             </div>
 
-            <div className="lg:text-right min-w-[340px] pt-12 lg:pt-0">
+            <div className="lg:text-right w-full lg:w-auto lg:min-w-[340px] pt-12 lg:pt-0">
               <div className="relative inline-block lg:text-right">
-                <motion.h4 initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} className="text-8xl font-serif italic text-slate-700/80 mb-2 leading-none">Kitty Bagga</motion.h4>
+                <motion.h4 initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} className="text-6xl md:text-8xl font-serif italic text-slate-700/80 mb-2 leading-none">Kitty Bagga</motion.h4>
                 <div className="h-0.5 w-full bg-[#005bab]/30 mb-4"></div>
                 <p className="text-slate-400 font-black uppercase tracking-[0.4em] text-xs">{t.consultant}</p>
               </div>
